@@ -44,3 +44,11 @@ A sleek, AI-powered web application that lets you upload a PDF document and chat
   ```bash
   ollama pull llama3.2
   ollama serve
+
+---
+
+## Steps
+### Clone the Repository
+  ```bash
+  git clone https://github.com/Nimeshs54/Flask-RAG-ChatBot.git
+  cd Flask-RAG-ChatBot
