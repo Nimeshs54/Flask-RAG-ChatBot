@@ -31,17 +31,6 @@ A sleek, AI-powered web application for chatting with PDF documents using Llama 
   ```bash
   ollama pull llama3.2
   ollama serve
----
-
-## 📦 Installation
-
-### Prerequisites
-- **Python 3.8+**: Ensure Python is installed on your system.
-- **Ollama**: Install Ollama and pull the Llama 3.2 model:
-  ```bash
-  ollama pull llama3.2
-  ollama serve
-   ```
 
 ---
 
