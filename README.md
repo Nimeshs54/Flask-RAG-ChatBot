@@ -1,7 +1,5 @@
 # Flask-RAG-ChatBot
 
-# Document Chatbot
-
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-3.0.3-green?style=flat-square&logo=flask)
 ![LangChain](https://img.shields.io/badge/LangChain-0.3.0-orange?style=flat-square)
