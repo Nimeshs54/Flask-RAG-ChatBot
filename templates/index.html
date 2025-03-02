@@ -19,6 +19,11 @@
             <form id="upload-form" enctype="multipart/form-data">
                 <label for="file">Upload a PDF to get started:</label>
                 <input type="file" name="file" id="file" accept=".pdf" required>
+                <label for="model">Select Model:</label>
+                <select name="model" id="model" required>
+                    <option value="llama3.2">Llama 3.2</option>
+                    <option value="deepseek-r1-distill-qwen-32b">DeepSeek R1 Distill Qwen 32B</option>
+                </select>
                 <button type="submit">Upload Document</button>
             </form>
             <p id="upload-message"></p>
@@ -27,6 +32,7 @@
         <!-- Chat Section (hidden until document is uploaded) -->
         <div id="chat-section" class="hidden">
             <h2>Ask a Question</h2>
+            <p>Using Model: <span id="current-model"></span></p>
             <div id="chat-box"></div>
             <form id="chat-form">
                 <input type="text" id="question" placeholder="Ask something about the document..." required>
@@ -35,7 +41,7 @@
         </div>
     </div>
     <footer>
-        <p>&copy; 2025 xAI. Powered by Llama 3.2 and LangChain.</p>
+        <p>© 2025 xAI. Powered by Llama 3.2 and DeepSeek R1.</p>
     </footer>
 
     <script>
@@ -44,6 +50,7 @@
         const chatForm = document.getElementById('chat-form');
         const chatBox = document.getElementById('chat-box');
         const uploadMessage = document.getElementById('upload-message');
+        const currentModel = document.getElementById('current-model');
 
         // Handle file upload
         uploadForm.addEventListener('submit', async (e) => {
@@ -60,6 +67,7 @@
                 uploadMessage.classList.add('success');
                 uploadForm.classList.add('hidden');
                 chatSection.classList.remove('hidden');
+                currentModel.textContent = result.model;
             } else {
                 uploadMessage.textContent = result.error;
                 uploadMessage.classList.add('error');
@@ -80,7 +88,7 @@
             const result = await response.json();
 
             if (response.ok) {
-                chatBox.innerHTML += `<p class="bot-message"><strong>Bot:</strong> ${result.answer}</p>`;
+                chatBox.innerHTML += `<p class="bot-message"><strong>Bot (${result.model}):</strong> ${result.answer}</p>`;
             } else {
                 chatBox.innerHTML += `<p class="error"><strong>Error:</strong> ${result.error}</p>`;
             }

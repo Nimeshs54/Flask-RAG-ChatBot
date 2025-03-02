@@ -78,6 +78,14 @@ input[type="file"]:hover {
     border-color: #007BFF;
 }
 
+select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
 button {
     padding: 12px 30px;
     background-color: #007BFF;
@@ -107,6 +115,11 @@ button:hover {
     color: #222;
     margin-bottom: 20px;
     text-align: center;
+}
+
+#current-model {
+    font-weight: 500;
+    color: #007BFF;
 }
 
 #chat-box {

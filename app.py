@@ -1,20 +1,28 @@
 import os
+from dotenv import load_dotenv
 from flask import Flask, request, render_template, jsonify
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain_ollama import OllamaEmbeddings
+from langchain_community.embeddings import OllamaEmbeddings
 from langchain_community.llms import Ollama
+from langchain_groq import ChatGroq
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+# Ensure upload folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
+# Global variable to store the QA chain and selected model
 qa_chain = None
+selected_model = None
 
 @app.route('/', methods=['GET'])
 def index():
@@ -22,7 +30,7 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    global qa_chain
+    global qa_chain, selected_model
     if 'file' not in request.files:
         return jsonify({"error": "No file uploaded"}), 400
     
@@ -30,6 +38,10 @@ def upload_file():
     if file.filename == '':
         return jsonify({"error": "No file selected"}), 400
     
+    selected_model = request.form.get('model')  # Get selected model from form
+    if not selected_model:
+        return jsonify({"error": "No model selected"}), 400
+
     if file and file.filename.endswith('.pdf'):
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
@@ -46,8 +58,20 @@ def upload_file():
         embeddings = OllamaEmbeddings(model="llama3.2")
         vectorstore = Chroma.from_documents(texts, embeddings)
 
-        # Set up the LLM and QA chain
-        llm = Ollama(model="llama3.2")
+        # Set up the LLM based on user selection
+        if selected_model == "llama3.2":
+            llm = Ollama(model="llama3.2")
+        elif selected_model == "deepseek-r1-distill-qwen-32b":
+            groq_api_key = os.getenv("GROQ_API_KEY")
+            if not groq_api_key:
+                return jsonify({"error": "GROQ_API_KEY not found in .env"}), 500
+            llm = ChatGroq(
+                groq_api_key=groq_api_key,
+                model_name="deepseek-r1-distill-qwen-32b"
+            )
+        else:
+            return jsonify({"error": "Invalid model selected"}), 400
+
         prompt_template = """Use the following pieces of context to answer the question. If you don't know the answer, say so.
         Context: {context}
         Question: {question}
@@ -60,7 +84,7 @@ def upload_file():
             chain_type_kwargs={"prompt": prompt}
         )
 
-        return jsonify({"message": "File uploaded and processed successfully"}), 200
+        return jsonify({"message": "File uploaded and processed successfully", "model": selected_model}), 200
     else:
         return jsonify({"error": "Only PDF files are supported"}), 400
 
@@ -76,7 +100,7 @@ def query():
     # Get the answer from the QA chain
     result = qa_chain({"query": question})
     answer = result["result"]
-    return jsonify({"answer": answer})
+    return jsonify({"answer": answer, "model": selected_model})
 
 if __name__ == '__main__':
     app.run(debug=True)
