@@ -51,13 +51,45 @@ A sleek, AI-powered web application that lets you upload a PDF document and chat
 ### Clone the Repository
   ```bash
   git clone https://github.com/Nimeshs54/Flask-RAG-ChatBot.git
-  cd Flask-RAG-ChatBot ```
+  cd Flask-RAG-ChatBot
+  ```
 
 ---
 
-## Set Up a Virtual Environment
+### Set Up a Virtual Environment
   ```bash
   python -m venv venv
   source venv/bin/activate  # On Windows: venv\Scripts\activate
+  ```
 
+### Install Dependencies
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+---
+
+### Run the Application
+  ```bash
+  python app.py
+  ```
+
+### Access the Application
+
+Open your browser and navigate to:
+
+[http://127.0.0.1:5000](http://127.0.0.1:5000)
+
+---
+
+## 🚀 Usage
+
+### 1. Upload a PDF
+On the homepage, select a PDF file and click "Upload Document."
+
+### 2. Chat with the Document
+Once processed, a chat interface appears. Type your questions and get answers based on the document's content.
+
+### 3. Enjoy
+Experience fast, accurate responses with a professional-grade UI.
 
