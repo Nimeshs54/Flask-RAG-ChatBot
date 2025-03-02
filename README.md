@@ -49,7 +49,7 @@ A sleek, AI-powered web application for chatting with PDF documents using Llama 
 For DeepSeek R1, sign up at [console.groq.com](https://console.groq.com) and add your API key to the `.env` file:
 
 ```plaintext
-GROQ_API_KEY=\033[31myour-api-key-here\033[0m
+GROQ_API_KEY='your-api-key-here'
 ```
 
 ---
