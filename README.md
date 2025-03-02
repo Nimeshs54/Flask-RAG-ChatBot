@@ -51,4 +51,13 @@ A sleek, AI-powered web application that lets you upload a PDF document and chat
 ### Clone the Repository
   ```bash
   git clone https://github.com/Nimeshs54/Flask-RAG-ChatBot.git
-  cd Flask-RAG-ChatBot
+  cd Flask-RAG-ChatBot ```
+
+---
+
+## Set Up a Virtual Environment
+  ```bash
+  python -m venv venv
+  source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+
