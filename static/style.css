@@ -1,0 +1,101 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #555;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #666;
+}
+
+input[type="file"],
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#chat-box {
+    border: 1px solid #eee;
+    padding: 15px;
+    height: 400px;
+    overflow-y: auto;
+    background-color: #fafafa;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #e3f2fd;
+}
+
+.bot-message {
+    background-color: #f1f8e9;
+}
+
+.error {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.success {
+    color: #388e3c;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+#upload-message {
+    text-align: center;
+}

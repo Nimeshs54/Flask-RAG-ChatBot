@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Document Chatbot</h1>
+
+        <!-- Upload Section -->
+        <div id="upload-section">
+            <form id="upload-form" enctype="multipart/form-data">
+                <label for="file">Upload a PDF to chat with:</label>
+                <input type="file" name="file" id="file" accept=".pdf" required>
+                <button type="submit">Upload</button>
+            </form>
+            <p id="upload-message"></p>
+        </div>
+
+        <!-- Chat Section (hidden until document is uploaded) -->
+        <div id="chat-section" class="hidden">
+            <h2>Ask a Question</h2>
+            <div id="chat-box"></div>
+            <form id="chat-form">
+                <input type="text" id="question" placeholder="Ask something about the document..." required>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const uploadForm = document.getElementById('upload-form');
+        const chatSection = document.getElementById('chat-section');
+        const chatForm = document.getElementById('chat-form');
+        const chatBox = document.getElementById('chat-box');
+        const uploadMessage = document.getElementById('upload-message');
+
+        // Handle file upload
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.json();
+
+            if (response.ok) {
+                uploadMessage.textContent = result.message;
+                uploadMessage.classList.add('success');
+                uploadForm.classList.add('hidden');
+                chatSection.classList.remove('hidden');
+            } else {
+                uploadMessage.textContent = result.error;
+                uploadMessage.classList.add('error');
+            }
+        });
+
+        // Handle chat query
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const question = document.getElementById('question').value;
+            chatBox.innerHTML += `<p class="user-message"><strong>You:</strong> ${question}</p>`;
+
+            const response = await fetch('/query', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ question })
+            });
+            const result = await response.json();
+
+            if (response.ok) {
+                chatBox.innerHTML += `<p class="bot-message"><strong>Bot:</strong> ${result.answer}</p>`;
+            } else {
+                chatBox.innerHTML += `<p class="error"><strong>Error:</strong> ${result.error}</p>`;
+            }
+            document.getElementById('question').value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        });
+    </script>
+</body>
+
+</html>

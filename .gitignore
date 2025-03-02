@@ -1,0 +1,27 @@
+# Python-related
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.env
+*.env
+
+# Flask & Logs
+instance/
+uploads/
+*.log
+logs/
+debug.log
+
+# IDE & Editor Files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Byte-compiled files
+*.egg-info/
+*.sqlite3
