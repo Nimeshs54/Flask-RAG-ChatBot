@@ -4,34 +4,33 @@
 ![Flask](https://img.shields.io/badge/Flask-3.0.3-green?style=flat-square&logo=flask)
 ![LangChain](https://img.shields.io/badge/LangChain-0.3.0-orange?style=flat-square)
 ![License](https://img.shields.io/badge/License-MIT-brightgreen?style=flat-square)
-![GitHub Issues](https://img.shields.io/github/issues/yourusername/document-chatbot?style=flat-square)
-![GitHub Stars](https://img.shields.io/github/stars/yourusername/document-chatbot?style=flat-square)
 
-A sleek, AI-powered web application that lets you upload a PDF document and chat with its contents using the Llama 3.2 model via Ollama, enhanced by LangChain's Retrieval-Augmented Generation (RAG) capabilities. Built with Flask, this tool offers a professional UI and seamless document querying experience.
-
----
+A sleek, AI-powered web application for chatting with PDF documents using Llama 3.2 (via Ollama) or DeepSeek R1 Distill Qwen 32B (via Groq API) with LangChain's RAG capabilities.
 
 ## ✨ Features
-
-- **PDF Upload**: Upload any PDF document to extract and process its content.
-- **AI Chat**: Ask questions about the document and get contextual answers powered by Llama 3.2.
-- **Modern UI**: A clean, professional interface with smooth animations and a responsive design.
-- **RAG Pipeline**: Combines document retrieval and generation for accurate, context-aware responses.
-- **Local LLM**: Runs entirely locally with Ollama, ensuring privacy and control.
-
----
+- **PDF Upload**: Upload PDFs to process their content.
+- **Model Selection**: Choose between Llama 3.2 or DeepSeek R1 Distill Qwen 32B.
+- **AI Chat**: Ask questions and get responses based on the document.
+- **Modern UI**: Professional interface with model selection and chat display.
 
 ## 🛠️ Tech Stack
+| Component           | Technology                              |
+|---------------------|-----------------------------------------|
+| **Web Framework**   | Flask                                   |                
+| **LLM Integration** | LangChain, Ollama, Groq API             |
+| **Models**          | Llama 3.2, DeepSeek R1 Distill Qwen 32B |
+| **Vector Store**    | Chroma                                  |
+| **PDF Processing**  | PyPDF2                                  |
+| **Frontend**        | HTML, CSS, JS                           |
 
-| Component           | Technology         |
-|---------------------|--------------------|
-| **Web Framework**   | Flask              |
-| **LLM Integration** | LangChain, Ollama  |
-| **Model**           | Llama 3.2          |
-| **Vector Store**    | Chroma             |
-| **PDF Processing**  | PyPDF2             |
-| **Frontend**        | HTML, CSS, JS      |
+## 📦 Installation
 
+### Prerequisites
+- **Python 3.8+**
+- **Ollama**: For Llama 3.2:
+  ```bash
+  ollama pull llama3.2
+  ollama serve
 ---
 
 ## 📦 Installation
@@ -42,52 +41,49 @@ A sleek, AI-powered web application that lets you upload a PDF document and chat
   ```bash
   ollama pull llama3.2
   ollama serve
+   ```
+
+---
+
+## Groq API Key
+For DeepSeek R1, sign up at [console.groq.com](https://console.groq.com) and add your API key to the `.env` file:
+
+```plaintext
+GROQ_API_KEY=\033[31myour-api-key-here\033[0m
+```
 
 ---
 
 ## Steps
-### Clone the Repository
-  ```bash
-  git clone https://github.com/Nimeshs54/Flask-RAG-ChatBot.git
-  cd Flask-RAG-ChatBot
-  ```
 
----
+### Clone the Repository
+```bash
+git clone https://github.com/Nimeshs54/Flask-RAG-ChatBot.git
+cd Flask-RAG-ChatBot
+```
 
 ### Set Up a Virtual Environment
-  ```bash
-  python -m venv venv
-  source venv/bin/activate  # On Windows: venv\Scripts\activate
-  ```
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
 
 ### Install Dependencies
-  ```bash
-  pip install -r requirements.txt
-  ```
-
----
+```bash
+pip install -r requirements.txt
+```
 
 ### Run the Application
-  ```bash
-  python app.py
-  ```
+```bash
+python app.py
+```
 
-### Access the Application
-
-Open your browser and navigate to:
-
-[http://127.0.0.1:5000](http://127.0.0.1:5000)
+Open your browser to [http://127.0.0.1:5000](http://127.0.0.1:5000).
 
 ---
 
 ## 🚀 Usage
-
-### 1. Upload a PDF
-On the homepage, select a PDF file and click "Upload Document."
-
-### 2. Chat with the Document
-Once processed, a chat interface appears. Type your questions and get answers based on the document's content.
-
-### 3. Enjoy
-Experience fast, accurate responses with a professional-grade UI.
+1. Select either **"Llama 3.2"** or **"DeepSeek R1 Distill Qwen 32B"** from the dropdown.
+2. Upload a PDF and wait for processing.
+3. Ask questions in the chat interface and receive responses from your chosen model.
 
