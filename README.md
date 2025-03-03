@@ -76,3 +76,22 @@ Open your browser to [http://127.0.0.1:5000](http://127.0.0.1:5000).
 2. Upload a PDF and wait for processing.
 3. Ask questions in the chat interface and receive responses from your chosen model.
 
+---
+
+## 📊 Results
+
+### **Llama 3.2 Model**
+**Example Query**:  
+_"What is this document about?"_
+
+**Llama 3.2 Response**:  
+![Llama 3.2 Result](https://github.com/user-attachments/assets/3213c4d4-cd5a-407c-b3d0-8deabf3f1e0e)
+
+---
+
+### **DeepSeek R1 Distill Qwen 32B Model**
+**Example Query**:  
+_"What is this document about?"_
+
+**DeepSeek R1 Distill Qwen 32B Response**:  
+![DeepSeek R1 Distill Qwen 32B Result](https://github.com/user-attachments/assets/81425858-7871-474d-8776-7cb54aa3b7f2)
